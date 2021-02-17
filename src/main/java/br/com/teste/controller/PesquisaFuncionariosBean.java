@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.teste.model.Funcionario;
-import br.com.teste.repository.FuncionarioRepository;
 import br.com.teste.service.FuncionarioService;
 import br.com.teste.service.exception.NegocioException;
 import br.com.teste.util.jsf.FacesUtil;

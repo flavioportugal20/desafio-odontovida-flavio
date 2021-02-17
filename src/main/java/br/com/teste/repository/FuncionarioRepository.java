@@ -12,8 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 
 import br.com.teste.model.Funcionario;
-import br.com.teste.service.exception.NegocioException;
 import br.com.teste.util.jpa.Transactional;
+import br.com.teste.util.jsf.FacesUtil;
 
 public class FuncionarioRepository implements Serializable {
 
@@ -54,7 +54,9 @@ public class FuncionarioRepository implements Serializable {
 			return manager.merge(funcionario);
 		} catch (PersistenceException e) {
 			String tipo = (funcionario.getId() != null) ? "editar" : "criar";
-			throw new NegocioException("Falha ao tentar " + tipo + " funcionário!");
+			FacesUtil.addErrorMessage("Falha ao tentar " + tipo + " funcionário!");
+			e.printStackTrace();
+			return null;
 		}
 	}
 
@@ -65,7 +67,8 @@ public class FuncionarioRepository implements Serializable {
 			manager.remove(funcionario);
 			manager.flush();
 		} catch (PersistenceException e) {
-			throw new NegocioException("Falha ao tentar deletar funcionário!");
+			FacesUtil.addErrorMessage("Falha ao tentar deletar funcionário!");
+			e.printStackTrace();
 		}
 	}
 

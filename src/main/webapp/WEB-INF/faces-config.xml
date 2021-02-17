@@ -15,7 +15,7 @@
 	
 	<factory>
 	    <exception-handler-factory>
-	        br.com.teste.util.jsf.exception.CustomExceptionHandlerFactory
+	        org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory
 	    </exception-handler-factory>
 	</factory>    
 		

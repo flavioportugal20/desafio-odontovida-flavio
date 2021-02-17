@@ -44,12 +44,13 @@ public class CadastroFuncionarioBean implements Serializable {
 	}
 
 	public void createUpdate() {
-		cadastroFuncionarioService.createUpdate(this.funcionario);
-		if(isEditando()) {
-			FacesUtil.addInfoMessage("Funcionario EDITADO com sucesso!");
-		}else {
-			limpar();
-			FacesUtil.addInfoMessage("Funcionario SALVO com sucesso!");
+		if(cadastroFuncionarioService.createUpdate(this.funcionario) != null){
+			if(isEditando()) {
+				FacesUtil.addInfoMessage("Funcionario EDITADO com sucesso!");
+			}else {
+				limpar();
+				FacesUtil.addInfoMessage("Funcionario SALVO com sucesso!");
+			}
 		}
 	}
 	
