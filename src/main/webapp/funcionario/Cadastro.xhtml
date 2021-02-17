@@ -1,0 +1,63 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">#{cadastroFuncionarioBean.editando ? 'Edição de Funcionário' : 'Novo Funcionário'}</ui:define>
+
+	<ui:define name="corpo">
+		
+		<h:form id="frm">
+			<p:focus context="frm" />
+
+			<h1>#{cadastroFuncionarioBean.editando ? 'Edição de Funcionário': 'Novo Funcionário'}</h1>
+
+			<p:messages autoUpdate="true" closable="true" id="messages" />
+			
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Editar" id="botaoEditar"
+						rendered="#{cadastroFuncionarioBean.editando == true}"
+						action="#{cadastroFuncionarioBean.createUpdate}" update="@form"/>
+
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						rendered="#{cadastroFuncionarioBean.editando == false}"
+						action="#{cadastroFuncionarioBean.createUpdate}" update="@form" />
+
+					<p:button value="Voltar" outcome="/funcionario/Lista" style="margin-left:10px;"/>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<h:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="30" maxlength="100" value="#{cadastroFuncionarioBean.funcionario.nome}" autocomplete="off">
+				</p:inputText>
+				
+				<p:outputLabel value="DataNascimento" for="dataNascimento" />
+				<p:inputMask id="dataNascimento" size="30" value="#{cadastroFuncionarioBean.funcionario.dataNascimento}" autocomplete="off"
+					mask="99/99/9999" >
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</p:inputMask>
+				
+				<p:outputLabel value="CPF" for="cpf" />
+				<p:inputMask id="cpf" size="30" maxlength="14" value="#{cadastroFuncionarioBean.funcionario.cpf}" autocomplete="off"
+					mask="999.999.999-99" >
+				</p:inputMask>
+				
+				<p:outputLabel value="Salário" for="salario" />
+				<p:inputNumber id="salario" size="30" value="#{cadastroFuncionarioBean.funcionario.salario}" autocomplete="off"
+					decimalPlaces="2" minValue="0" maxValue="9999999999.99" decimalSeparator="," thousandSeparator="." >
+					<p:ajax listener="#{cadastroFuncionarioBean.clearMsg}" event="keyup" process="" />				
+				</p:inputNumber>
+				
+			</h:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
