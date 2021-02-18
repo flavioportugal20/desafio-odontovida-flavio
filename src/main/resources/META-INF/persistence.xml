@@ -9,7 +9,7 @@
 		<class>br.com.teste.model.Funcionario</class>
 
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="none" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.connection.autocommit" value="false" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
