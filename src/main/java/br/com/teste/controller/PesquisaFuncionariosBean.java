@@ -25,6 +25,7 @@ public class PesquisaFuncionariosBean implements Serializable {
 	
 	private List<Funcionario> funcionarioFiltrados;	
 	private String filtro;
+	private Integer totalFuncionarios;
 	
 	public PesquisaFuncionariosBean() {
 		filtro = null;
@@ -33,12 +34,14 @@ public class PesquisaFuncionariosBean implements Serializable {
 	@PostConstruct
 	public void pesquisar() {
 		funcionarioFiltrados = cadastroFuncionarioService.filtrados(filtro);
+		totalFuncionarios = funcionarioFiltrados.size();
 	}
 	
 	public void delete() {
 		try {
 			cadastroFuncionarioService.delete(this.funcionario);
 			funcionarioFiltrados.remove(this.funcionario);
+			totalFuncionarios -= 1;
 			FacesUtil.addInfoMessage("Funcionário " + this.funcionario.getNome() + " excluído com sucesso!");		
 		} catch (NegocioException e) {
 			FacesUtil.addErrorMessage(e.getMessage());
@@ -64,5 +67,14 @@ public class PesquisaFuncionariosBean implements Serializable {
 	public void setFiltro(String filtro) {
 		this.filtro = filtro;
 	}
+	
+	public Integer getTotalFuncionarios() {
+		return totalFuncionarios;
+	}
+
+	public void setTotalFuncionarios(Integer totalFuncionarios) {
+		this.totalFuncionarios = totalFuncionarios;
+	}
+
 
 }
