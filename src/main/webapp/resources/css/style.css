@@ -10,11 +10,9 @@ body {
 header {
 	padding: 5px 0px;
 	margin-bottom: 20px;
-	height: 30px;
-	
+	height: 30px;	
 	background-color: rgb(0, 64, 128);
-	color: #fff;
-	
+	color: #fff;	
 	box-shadow: 0px 2px 2px #ccc;
 }
 
@@ -23,16 +21,22 @@ header > div {
 }
 
 #conteudo {
-	padding: 0px 8px
+	padding: 0px 8px;
+	padding-bottom: 50px;
 }
 
 footer {
-	margin-top: 20px;
 	width: 100%;
 	height: 50px;
-	margin: 10px;
-	
-	position: relative;
+	bottom: 0;
+	position: fixed;
+	background:#3264b0;
+	text-decoration:none;
+	color:#ffffff;
+}
+
+footer a {
+	color:#ffffff;
 }
 
 h1 {
@@ -69,6 +73,10 @@ h1 {
 .msg-campo {
 	width: 400px;
 	float:left;
+}
+
+.logo {
+	width: 130px;
 }
 
 .ui-panelgrid td {
