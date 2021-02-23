@@ -11,9 +11,10 @@ import javax.inject.Named;
 import br.com.teste.model.Funcionario;
 import br.com.teste.service.FuncionarioService;
 import br.com.teste.service.exception.NegocioException;
+import br.com.teste.util.Utils;
 import br.com.teste.util.jsf.FacesUtil;
 
-@Named
+@Named("listBean")
 @ViewScoped
 public class PesquisaFuncionariosBean implements Serializable {
 
@@ -21,7 +22,7 @@ public class PesquisaFuncionariosBean implements Serializable {
 	
 	@Inject
 	private FuncionarioService cadastroFuncionarioService;
-	private Funcionario funcionario;
+	private Funcionario funcionarioSelect;
 	
 	private List<Funcionario> funcionarioFiltrados;	
 	private String filtro;
@@ -37,12 +38,14 @@ public class PesquisaFuncionariosBean implements Serializable {
 	
 	public void delete() {
 		try {
-			cadastroFuncionarioService.delete(this.funcionario);
-			funcionarioFiltrados.remove(this.funcionario);
+			cadastroFuncionarioService.delete(this.funcionarioSelect);
+			funcionarioFiltrados.remove(this.funcionarioSelect);
 
-			FacesUtil.addInfoMessage("Funcionário " + this.funcionario.getNome() + " excluído com sucesso!");		
+			//FacesUtil.addInfoMessage("Funcionário " + this.funcionarioSelect.getNome() + " excluído com sucesso!");	
+			Utils.addDetailMessage("Funcionário " + this.funcionarioSelect.getNome() + " excluído com sucesso!");
 		} catch (NegocioException e) {
 			FacesUtil.addErrorMessage(e.getMessage());
+			//Utils.addDetailMessage(e.getMessage());
 		}
 	}
 	
@@ -50,12 +53,12 @@ public class PesquisaFuncionariosBean implements Serializable {
 		return funcionarioFiltrados;
 	}
 	
-	public Funcionario getFuncionario() {
-		return this.funcionario;
+	public Funcionario getFuncionarioSelect() {
+		return this.funcionarioSelect;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+	public void setFuncionarioSelect(Funcionario funcionario) {
+		this.funcionarioSelect = funcionario;
 	}
 
 	public String getFiltro() {

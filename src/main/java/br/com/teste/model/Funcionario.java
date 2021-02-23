@@ -15,12 +15,13 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.br.CPF;
 
+
 import br.com.teste.service.validation.IdadeMinima;
 import br.com.teste.service.validation.SomenteAlfabeto;
 
 @Entity
 @Table(name = "funcionario")
-public class Funcionario implements Serializable{
+public class Funcionario implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -113,7 +114,6 @@ public class Funcionario implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 
+	
 }

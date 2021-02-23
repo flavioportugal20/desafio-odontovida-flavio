@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:adm="http://github.com/adminfaces"
+	template="#{layoutMB.template}">
+
+	<ui:define name="metadata">
+		<ui:param name="title" value="Funcionários" />
+		
+		<style type="text/css">
+			.ui-datatable .ui-datatable-header {
+				text-align: right !important;
+			}
+		</style>
+		
+		<h:outputScript library="js" name="script.js" target="head"/>
+		<h:outputStylesheet library="css" name="style.css" />
+	</ui:define>
+	
+	<ui:define name="head">
+        <title>OdontoVida</title>
+    </ui:define>
+
+    <ui:define name="logo-lg">
+        OdontoVida
+    </ui:define>
+
+    <ui:define name="logo-mini">
+        ODO
+    </ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="/includes/menu.xhtml"/>
+    </ui:define>
+
+    <ui:define name="top-menu">
+        <ui:include src="/includes/top-bar.xhtml"/>
+    </ui:define>
+
+	<ui:define name="description">
+		<span id="total_funcionario" style="font-size:24px; font-weight: 500; color:#f0611c;"> #{listBean.totalFuncionarios}</span>
+        Cadastrados
+    </ui:define>
+
+	<ui:define name="body">
+		<h:form  id="frmPesquisa">
+			
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<div >
+						<h3 class="box-title hidden-sm hidden-xs">Tabela de Dados</h3>
+						<p:commandButton action="/funcionario/car-form?faces-redirect=true"
+							icon="fa fa-plus" value="Novo Funcionário" styleClass="btn btn-success pull-right" />
+						<p:spacer width="5" />				
+					</div>
+					
+					<p:dataTable id="funcionariosTable" var="funcionario"
+						value="#{listBean.funcionariosFiltrados}" paginator="true"
+						paginatorPosition="bottom"
+						rowStyleClass="rowTabela"
+						style="margin-top:30px"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15" rows="10"
+						emptyMessage="Nenhum funcionário encontrado.">
+						
+					<f:facet name="header">
+                            <span style="font-size:15px;">Procura:</span>
+                            <p:spacer width="12" />
+                            <p:inputText id="txtpesquisar" size="40" maxlength="100" value="#{listBean.filtro}" >
+                       			<p:ajax listener="#{listBean.pesquisar}" update=":frmPesquisa"/>
+                       		</p:inputText>
+                            
+                        </f:facet>	
+
+					
+					<p:column styleClass="align-center" headerText="Id" priority="1" style="width:10%">
+						<h:outputText value="#{funcionario.id}" />
+					</p:column>
+
+					<p:column styleClass="align-center" headerText="Nome" priority="2" tyle="width:40%">
+						<h:outputText value="#{funcionario.nome}" />
+					</p:column>
+						
+
+					<p:column headerText="Data Nascimento" priority="3" style="width:12%">
+						<h:outputText value="#{funcionario.dataNascimento}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="CPF" priority="4" style="width:15%">
+						<h:outputText value="#{funcionario.cpf}" />
+					</p:column>
+
+					<p:column headerText="Salario" priority="5"
+						style="width:11%; text-align: right;">
+						<h:outputText value="#{funcionario.salario}">
+							<f:convertNumber type="currency" locale="pt_BR" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Editar" priority="6" style="width: 6%; text-align: center">
+						<p:button outcome="/funcionario/car-form" icon="fa fa-pencil" styleClass="btn btn-primary btn-xs btn-tabela"
+							title="Editar">
+							<f:param name="id" value="#{funcionario.id}" />
+						</p:button>
+					</p:column>
+					<p:column headerText="Excluir" priority="6" style="width: 6%; text-align: center">
+						<p:commandButton icon="fa fa-trash" title="Excluir"  styleClass="btn btn-danger btn-xs btn-tabela"
+							oncomplete="PF('confirmacaoExclusao').show()" process="@this"
+							update=":frmPesquisa:confirmacaoExclusaoDialog">
+							<f:setPropertyActionListener
+								target="#{listBean.funcionarioSelect}"
+								value="#{funcionario}" />
+						</p:commandButton>
+					</p:column>
+						
+						
+					</p:dataTable>
+					
+				</div>
+			</div>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" header="Exclusão de funcionario"
+				message="Tem certeza que deseja excluir o funcionario #{listBean.funcionarioSelect.nome}?"
+				styleClass="box-danger box-solid" widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:commandButton value="Yes"
+					styleClass="btn-material btn-primary ui-confirmdialog-yes"
+					icon="fa fa-check"
+					oncomplete="PF('confirmacaoExclusao').hide();"
+					action="#{listBean.delete}" process="@this" update=":frmPesquisa"  />
+											
+				<p:commandButton value="No" type="button"
+					styleClass="btn-material btn-danger ui-confirmdialog-no"
+					icon="fa fa-close" />
+			</p:confirmDialog>
+		</h:form>
+		
+	</ui:define>
+	
+	<ui:define name="footer">
+          <a target="_blank"
+           href="http://www.franquiasodontovida.com.br/">
+            Copyright (C) 2021 - Franquia OdontoVida
+        </a>
+
+        <div class="pull-right hidden-xs" style="color: gray">
+            <i>1.0.0</i>
+        </div>
+    </ui:define>
+
+</ui:composition>

@@ -1,147 +1,28 @@
-@charset "utf-8";
 
-body {
-	font-size: 12px;
-	font-family: Arial, Helvetica, sans-serif;
-	margin: 0px;
-	font-weight: normal;
+.ui-datatable .rowTabela td{
+    border: 1px solid #f4f4f4 !important;
+    padding: 5px;
 }
 
-header {
-	padding: 5px 0px;
-	margin-bottom: 20px;
-	height: 30px;	
-	background-color: rgb(0, 64, 128);
-	color: #fff;	
-	box-shadow: 0px 2px 2px #ccc;
+.ui-datatable-header{
+	border-style: hidden !important;
+	padding-right:0 !important;
 }
 
-header > div {
-	margin-left: 8px
+.ui-datatable thead th {
+    background-image: none !important;
+    background-color: #e0e1e1 !important;
+    color: #171717 !important;
+   
 }
 
-#conteudo {
-	padding: 0px 8px;
-	padding-bottom: 50px;
+.ui-datatable .btn-tabela{
+	padding-left:30px !important;
+	padding-right:30px !important;
 }
 
-footer {
-	width: 100%;
-	height: 50px;
-	bottom: 0;
-	position: fixed;
-	background:#3264b0;
-	text-decoration:none;
-	color:#ffffff;
+#userImage{
+	width: 17px; 
 }
 
-footer a {
-	color:#ffffff;
-}
 
-h1 {
-	font-size: 24px;
-	font-weight: 500;
-	padding: 0px;
-	margin: 0px
-}
-
-#login-dialog {
-	width: 290px;
-	margin: auto;
-	margin-top: 150px;
-}
-
-.grid-login {
-	background-color: #f2f2f2;
-	border-radius: 8px;
-	border: 1px solid #ccc;
-	margin-top: 8px;
-	padding: 10px
-}
-
-.rotulo {
-	width: 150px;
-	float:left;
-}
-
-.campo {
-	width: 250px;
-	float:left;
-}
-
-.msg-campo {
-	width: 400px;
-	float:left;
-}
-
-.logo {
-	width: 130px;
-}
-
-.ui-panelgrid td {
-	height: 34px
-}
-
-.ajax-status {
-	position: fixed;
-	top: 55px;
-	right: 10px;
-	width: 35px;
-	height: 35px
-}
-
-.ui-selectmanycheckbox td {
-	border-width: 0px !important;
-	padding: 0px !important;
-}
-
-.ui-selectmanycheckbox td label {
-	padding-right: 10px;
-}
-
-.produto-tabela {
-	width: 100% !important;
-}
-
-.produto-tabela input {
-	width: 99%;
-}
-
-/* Customiza TabView - início */
-.ui-tabs .ui-tabs-panel {
-    padding: 0.5em 0.2em !important;
-}
-
-.ui-tabs {
-    padding: 0px !important;
-}
-
-.ui-tabs .ui-tabs-nav {
-    margin: -1px !important;
-}
-
-.ui-tabs.ui-tabs-top > .ui-tabs-nav {
-    padding: 0px !important;
-}
-/* Customiza TabView - fim */
-
-/* Menu sistema inicio */
-.menu-sistema {
-    border: 0px !important;
-    padding: 0px !important;
-    background: none !important;
-}
-
-.menu-sistema .ui-menu-parent > a .ui-menuitem-text, .menu-sistema > .ui-menu-list > .ui-menuitem > a > .ui-menuitem-text {
-    color: #ffffff !important;
-}
-
-/*.menu-sistema .ui-icon-triangle-1-s {
-    background: url(#{resource['images:seta-para-baixo.png']}) no-repeat !important;
-}*/
-/* Menu sistema fim */
-
-.ui-state-disabled {
-	opacity: .80 !important;
-}
