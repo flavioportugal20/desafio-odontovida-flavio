@@ -9,7 +9,6 @@ import javax.inject.Named;
 
 import br.com.teste.model.Funcionario;
 import br.com.teste.service.FuncionarioService;
-import br.com.teste.util.Utils;
 import br.com.teste.util.jsf.FacesUtil;
 
 @Named("cadastroBean")
@@ -34,8 +33,7 @@ public class CadastroFuncionarioBean implements Serializable {
 					Long id = Long.parseLong(idParam);
 					this.funcionario = cadastroFuncionarioService.findById(id);	
 				} catch (NumberFormatException e) {
-					//FacesUtil.addErrorMessage("Falha ao tentar buscar funcionário");
-					Utils.addErrorMessage("Falha ao tentar buscar funcionário");
+					FacesUtil.addErrorMessage("Falha ao tentar buscar funcionário");
 				}
 			}
 		}
@@ -48,13 +46,13 @@ public class CadastroFuncionarioBean implements Serializable {
 	public void createUpdate() {
 		if(cadastroFuncionarioService.createUpdate(this.funcionario) != null){
 			if(isEditando()) {
-				//FacesUtil.addInfoMessage("Funcionario EDITADO com sucesso!");
-				Utils.addDetailMessage("Funcionario EDITADO com sucesso!");
+				FacesUtil.addInfoMessage("Funcionario EDITADO com sucesso!");
 			}else {
 				limpar();
-				//FacesUtil.addInfoMessage("Funcionario SALVO com sucesso!");
-				Utils.addDetailMessage("Funcionario SALVO com sucesso!");
+				FacesUtil.addInfoMessage("Funcionario SALVO com sucesso!");
 			}
+		}else {
+			FacesUtil.addErrorMessage("Falha no processo!");
 		}
 	}
 	

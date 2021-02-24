@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 
 import br.com.teste.model.Funcionario;
-import br.com.teste.util.Utils;
 import br.com.teste.util.jpa.Transactional;
 import br.com.teste.util.jsf.FacesUtil;
 
@@ -55,8 +54,7 @@ public class FuncionarioRepository implements Serializable {
 			return manager.merge(funcionario);
 		} catch (PersistenceException e) {
 			String tipo = (funcionario.getId() != null) ? "editar" : "criar";
-			//FacesUtil.addErrorMessage("Falha ao tentar " + tipo + " funcionário!");
-			Utils.addErrorMessage("Falha ao tentar " + tipo + " funcionário!");
+			FacesUtil.addErrorMessage("Falha ao tentar " + tipo + " funcionário!");
 			e.printStackTrace();
 			return null;
 		}
@@ -69,8 +67,7 @@ public class FuncionarioRepository implements Serializable {
 			manager.remove(funcionario);
 			manager.flush();
 		} catch (PersistenceException e) {
-			//FacesUtil.addErrorMessage("Falha ao tentar deletar funcionário!");
-			Utils.addErrorMessage("Falha ao tentar deletar funcionário!");
+			FacesUtil.addErrorMessage("Falha ao tentar deletar funcionário!");
 			e.printStackTrace();
 		}
 	}

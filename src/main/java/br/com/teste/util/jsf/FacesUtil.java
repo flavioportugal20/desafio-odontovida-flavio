@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import org.omnifaces.util.Messages;
 import org.primefaces.context.RequestContext;
 
 public class FacesUtil {
@@ -34,13 +35,47 @@ public class FacesUtil {
 		return !isGetback();
 	}
 	
-	public static void addErrorMessage(String message) {
+	/*public static void addErrorMessage(String message) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
 	}
 	
 	public static void addInfoMessage(String message) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));
+	}*/
+	
+	public static void addErrorMessage(String message) {
+		addDetailMessage(message, FacesMessage.SEVERITY_ERROR);
 	}
+	
+	public static void addInfoMessage(String message) {
+		addDetailMessage(message, null);
+	}
+	
+	public static void addErrorMessage(String idInput, String message) {
+		addDetailMessage(message, FacesMessage.SEVERITY_ERROR, idInput);
+	}
+	
+	public static void addInfoMessage(String idInput, String message) {
+		addDetailMessage(message, null, idInput);
+	}
+	
+	public static void addDetailMessage(String message, FacesMessage.Severity severity) {
+
+        FacesMessage facesMessage = Messages.create("").detail(message).get();
+        if (severity != null && severity != FacesMessage.SEVERITY_INFO) {
+            facesMessage.setSeverity(severity);
+        }
+        Messages.add(null, facesMessage);
+    }
+    
+    public static void addDetailMessage(String message, FacesMessage.Severity severity, String idInput) {
+
+        FacesMessage facesMessage = Messages.create("").detail(message).get();
+        if (severity != null && severity != FacesMessage.SEVERITY_INFO) {
+            facesMessage.setSeverity(severity);
+        }
+        Messages.add(idInput, facesMessage);
+    }
 	
 	/**
 	 * @param Nome do parametro

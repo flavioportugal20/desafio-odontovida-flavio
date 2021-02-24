@@ -34,10 +34,11 @@
     
     
     <ui:define name="title">
-        #{cadastroBean.editando ? 'Edição de Funcionário' : 'Novo Funcionário'}
+        #{cadastroBean.editando ? 'Edição de Funcionário ' : 'Novo Funcionário'}
+        <span style="font-size:24px; font-weight: 500; color:#f0611c;"> #{cadastroBean.funcionario.id}</span>
     </ui:define>
     <ui:define name="body">
-        <adm:breadcrumb title="#{cadastroBean.editando ? 'Novo' : 'Funcionário '.concat(cadastroBean.funcionario.id)}" link="/car-form.jsf?id=#{cadastroBean.funcionario.id}"/>
+        <adm:breadcrumb title="#{not cadastroBean.editando ? 'Novo' : 'Funcionário '.concat(cadastroBean.funcionario.id)}" link="/car-form.jsf?id=#{cadastroBean.funcionario.id}"/>
         <h:form id="form" prependId="false">
             <p:focus rendered="#{cadastroBean.editando}"/>
             <p:panel styleClass="box-primary card">
@@ -45,7 +46,7 @@
                     <p:commandButton value="Save" action="#{cadastroBean.createUpdate}" update="@form"
                                      icon="fa fa-check" styleClass="btn-primary"/>
                     <p:spacer width="5" rendered="#{not cadastroBean.editando}"/>
-                    <p:commandButton value="Clear" action="#{cadastroBean.limpar}" process="@this"
+                    <p:commandButton value="Limpar" process="@this"
                                      icon="fa fa-refresh" styleClass="btn-success"
                                      update="@form" rendered="#{not cadastroBean.editando}" resetValues="true"/>
                     <p:spacer width="5" rendered="#{cadastroBean.editando}"/>
@@ -66,7 +67,7 @@
                 <p:splitButton value="Save" action="#{cadastroBean.createUpdate}" update="@form"
                                icon="fa fa-check"
                                styleClass="hidden-md hidden-lg btn-primary">
-                    <p:menuitem value="Reset" action="#{cadastroBean.limpar}"
+                    <p:menuitem value="Limpar"
                                 process="@this" update="@form" rendered="#{not cadastroBean.editando}"
                                 resetValues="true" icon="fa fa-refresh"/>
                     <p:menuitem value="Delete" action="#{cadastroBean.delete}" process="@this"
@@ -86,35 +87,41 @@
                 <div class="ui-g ui-fluid">
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
                         <div class="ui-sm-12 ui-g-11">
-                            <p:outputLabel for="id" value="ID"/>
-                        </div>
-                        <div class="ui-sm-12 ui-g-11" >
-                            <p:inputText id="id" value="#{cadastroBean.funcionario.id}" maxlength="100" autocomplete="off" readonly="true" styleClass="form-control ui-state-disabled" style="width: 100%"/>
-                            <span class="help-block"> 
-                                <p:message for="id" /> 
-                            </span> 
-                        </div>
-                    </div> 
-                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
-                        <div class="ui-sm-12 ui-g-11">
                             <p:outputLabel value="Nome" for="inptNome"/>
                         </div>
                         <div class="ui-sm-12 ui-g-11" >
-                            <p:inputText id="inptNome" value="#{cadastroBean.funcionario.nome}" required="true"/>
+                            <p:inputText id="inptNome" value="#{cadastroBean.funcionario.nome}" 
+                            	autocomplete="off" maxlength="100" required="true"/>
                             <span class="help-block"> 
                                 <p:message for="inptNome" /> 
                             </span> 
                         </div>
-                    </div>     
+                    </div>
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad">     
                         <div class="ui-sm-12 ui-g-11">
                             <p:outputLabel value="CPF" for="inptCpf"/>
                         </div>
                         <div class="ui-sm-12 ui-g-11" >
-                            <p:inputText id="inptCpf" value="#{cadastroBean.funcionario.cpf}" required="true"/>
+                            <p:inputMask id="inptCpf" value="#{cadastroBean.funcionario.cpf}" 
+                            	autocomplete="off" maxlength="14" required="true" mask="999.999.999-99">                          
+                            </p:inputMask>
                             <span class="help-block"> 
                                 <p:message for="inptCpf" /> 
                             </span>
+                        </div>
+                    </div>         
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:outputLabel value="Data de Nascimento" for="inptDataNascimento"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <p:inputMask id="inptDataNascimento" value="#{cadastroBean.funcionario.dataNascimento}" 
+                            	autocomplete="off" mask="99/99/9999" required="true">
+                            	<f:convertDateTime pattern="dd/MM/yyyy" />
+                            </p:inputMask>
+                            <span class="help-block"> 
+                                <p:message for="inptDataNascimento" /> 
+                            </span> 
                         </div>
                     </div>     
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad">     
@@ -122,7 +129,8 @@
                             <p:outputLabel value="Salario" for="inptSalario"/>
                         </div>
                         <div class="ui-sm-12 ui-g-11" >
-                            <p:inputNumber id="inptSalario" value="#{cadastroBean.funcionario.salario}" required="true"/>
+                            <p:inputNumber id="inptSalario" value="#{cadastroBean.funcionario.salario}" required="true" autocomplete="off"
+                            	decimalPlaces="2" minValue="0" maxValue="9999999999.99" decimalSeparator="," thousandSeparator="."/>
                             <span class="help-block"> 
                                 <p:message for="inptSalario" /> 
                             </span>
@@ -134,7 +142,7 @@
                     <p:splitButton value="Save" action="#{cadastroBean.createUpdate}" update="@form"
                                    icon="fa fa-check"
                                    styleClass="hidden-md hidden-lg btn-primary">
-                        <p:menuitem value="Reset" action="#{cadastroBean.limpar}"
+                        <p:menuitem value="Limpar" 
                                     process="@this" update="@form" rendered="#{not cadastroBean.editando}"
                                     resetValues="true" icon="fa fa-refresh"/>
                         <p:menuitem value="Delete" action="#{cadastroBean.delete}" process="@this"

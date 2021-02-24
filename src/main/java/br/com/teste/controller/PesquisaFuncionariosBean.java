@@ -11,7 +11,6 @@ import javax.inject.Named;
 import br.com.teste.model.Funcionario;
 import br.com.teste.service.FuncionarioService;
 import br.com.teste.service.exception.NegocioException;
-import br.com.teste.util.Utils;
 import br.com.teste.util.jsf.FacesUtil;
 
 @Named("listBean")
@@ -41,11 +40,9 @@ public class PesquisaFuncionariosBean implements Serializable {
 			cadastroFuncionarioService.delete(this.funcionarioSelect);
 			funcionarioFiltrados.remove(this.funcionarioSelect);
 
-			//FacesUtil.addInfoMessage("Funcionário " + this.funcionarioSelect.getNome() + " excluído com sucesso!");	
-			Utils.addDetailMessage("Funcionário " + this.funcionarioSelect.getNome() + " excluído com sucesso!");
+			FacesUtil.addInfoMessage("Funcionário " + this.funcionarioSelect.getNome() + " excluído com sucesso!");	
 		} catch (NegocioException e) {
 			FacesUtil.addErrorMessage(e.getMessage());
-			//Utils.addDetailMessage(e.getMessage());
 		}
 	}
 	
