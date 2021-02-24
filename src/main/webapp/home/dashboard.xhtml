@@ -1,0 +1,283 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<div class="row">
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="info-box">
+				<span class="info-box-icon bg-aqua"><i
+					class="fa fa-handshake-o"></i></span>
+
+				<div class="info-box-content">
+					<span class="info-box-text">Contratos no dia</span> <span
+						class="info-box-number">90</span>
+				</div>
+				<!-- /.info-box-content -->
+			</div>
+			<!-- /.info-box -->
+		</div>
+		<!-- /.col -->
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="info-box">
+				<span class="info-box-icon bg-red"><i
+					class="fa fa-google-plus"></i></span>
+
+				<div class="info-box-content">
+					<span class="info-box-text">Likes</span> <span
+						class="info-box-number">41.410</span>
+				</div>
+				<!-- /.info-box-content -->
+			</div>
+			<!-- /.info-box -->
+		</div>
+		<!-- /.col -->
+
+		<!-- fix for small devices only -->
+		<div class="clearfix visible-sm-block"></div>
+
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="info-box">
+				<span class="info-box-icon bg-green"><i class="fa fa-usd"></i></span>
+
+				<div class="info-box-content">
+					<span class="info-box-text">Lucro</span> <span
+						class="info-box-number">7.600,00</span>
+				</div>
+				<!-- /.info-box-content -->
+			</div>
+			<!-- /.info-box -->
+		</div>
+		<!-- /.col -->
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="info-box">
+				<span class="info-box-icon bg-yellow"><i class="fa fa-users"></i></span>
+
+				<div class="info-box-content">
+					<span class="info-box-text">Franqueados</span> <span
+						class="info-box-number">2.000</span>
+				</div>
+				<!-- /.info-box-content -->
+			</div>
+			<!-- /.info-box -->
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title">Gráfico do Balanço Anual Comparado</h3>
+
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool"
+							data-widget="collapse">
+							<i class="fa fa-minus"></i>
+						</button>
+						<div class="btn-group">
+							<button type="button" class="btn btn-box-tool dropdown-toggle"
+								data-toggle="dropdown">
+								<i class="fa fa-wrench"></i>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+							</ul>
+						</div>
+						<button type="button" class="btn btn-box-tool"
+							data-widget="remove">
+							<i class="fa fa-times"></i>
+						</button>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body" style="display: block;">
+					<div class="row">
+						<div class="col-md-8 hidden-sm hidden-xs">
+							<p class="text-center">
+								<strong>Vendas: 1 Janeiro, 2020 - 24 Fevereiro, 2021</strong>
+							</p>
+
+							<div class="chart">
+								<!-- Sales Chart Canvas -->
+								<canvas id="graficoAnual" style="height: 400px"></canvas>
+							</div>
+							<!-- /.chart-responsive -->
+						</div>
+						<!-- /.col -->
+						<div class="col-md-4">
+							<p class="text-center">
+								<strong>Conclusão de metas no ano de 2021</strong>
+							</p>
+
+							<div class="progress-group">
+								<span class="progress-text">Novos Contratos</span> <span
+									class="progress-number"><b>780</b>/1000</span>
+
+								<div class="progress sm">
+									<div class="progress-bar progress-bar-aqua" style="width: 78%"></div>
+								</div>
+							</div>
+							<!-- /.progress-group -->
+							<div class="progress-group">
+								<span class="progress-text">Likes nas Redes Sociais</span> <span
+									class="progress-number"><b>7431</b>/10000</span>
+
+								<div class="progress sm">
+									<div class="progress-bar progress-bar-red"
+										style="width: 74.31%"></div>
+								</div>
+							</div>
+							<!-- /.progress-group -->
+							<div class="progress-group">
+								<span class="progress-text">Lucro Anual</span> <span
+									class="progress-number"><b>8670</b>/20000</span>
+
+								<div class="progress sm">
+									<div class="progress-bar progress-bar-green"
+										style="width: 43.35%"></div>
+								</div>
+							</div>
+							<!-- /.progress-group -->
+							<div class="progress-group">
+								<span class="progress-text">Novos Franqueados</span> <span
+									class="progress-number"><b>256</b>/500</span>
+
+								<div class="progress sm">
+									<div class="progress-bar progress-bar-yellow"
+										style="width: 51.2%"></div>
+								</div>
+							</div>
+							<!-- /.progress-group -->
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- ./box-body -->
+				<div class="box-footer" style="display: block;">
+					<div class="row">
+						<div class="col-sm-3 col-xs-6">
+							<div class="description-block border-right">
+								<span class="description-percentage text-green"><i
+									class="fa fa-caret-up"></i> 17%</span>
+								<h5 class="description-header">R$ 35.210,43</h5>
+								<span class="description-text">RENDIMENTO TOTAL</span>
+							</div>
+							<!-- /.description-block -->
+						</div>
+						<!-- /.col -->
+						<div class="col-sm-3 col-xs-6">
+							<div class="description-block border-right">
+								<span class="description-percentage text-yellow"><i
+									class="fa fa-caret-left"></i> 0%</span>
+								<h5 class="description-header">R$ 10.390,90</h5>
+								<span class="description-text">CUSTO TOTAL</span>
+							</div>
+							<!-- /.description-block -->
+						</div>
+						<!-- /.col -->
+						<div class="col-sm-3 col-xs-6">
+							<div class="description-block border-right">
+								<span class="description-percentage text-green"><i
+									class="fa fa-caret-up"></i> 20%</span>
+								<h5 class="description-header">R$ 24.813,53</h5>
+								<span class="description-text">LUCRO TOTAL</span>
+							</div>
+							<!-- /.description-block -->
+						</div>
+						<!-- /.col -->
+						<div class="col-sm-3 col-xs-6">
+							<div class="description-block">
+								<span class="description-percentage text-red"><i
+									class="fa fa-caret-down"></i> 18%</span>
+								<h5 class="description-header">300</h5>
+								<span class="description-text">METAS ATINGIDAS</span>
+							</div>
+							<!-- /.description-block -->
+						</div>
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.box-footer -->
+			</div>
+			<!-- /.box -->
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+	<h:outputScript library="js" name="Chart.js" />
+	<script type="text/javascript">
+		//<![CDATA[
+		$(function() {
+
+			'use strict';
+
+			/* ChartJS
+			 * -------
+			 * Here we will create a few charts using ChartJS
+			 */
+
+			var ctx = document.getElementById("graficoAnual").getContext('2d');
+
+			new Chart(
+					ctx,
+					{
+						type : 'line',
+						data : {
+							labels : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+									'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ],
+							datasets : [
+									{
+										data : [ 86, 111, 111, 111, 107, 111,
+												133, 221, 783, 2478, 3783, 5478 ],
+										label : "2017",
+										borderColor : "#3e95cd",
+										fill : false
+									},
+									{
+										data : [ 282, 350, 411, 502, 635, 809,
+												947, 1402, 3700, 5267, 4583, 8878 ],
+										label : "2018",
+										borderColor : "#F39C12",
+										fill : false
+									},
+									{
+										data : [ 168, 170, 178, 190, 203, 276,
+												408, 547, 6750, 7340, 6083, 7878 ],
+										label : "2019",
+										borderColor : "#00A65A",
+										fill : false
+									},
+									{
+										data : [ 40, 20, 10, 16, 24, 38, 74,
+												167, 508, 5840, 7830, 4478 ],
+										label : "2020",
+										borderColor : "#DD4B39",
+										fill : false
+									},
+									{
+										data : [ 3000, 7500, 9000 ],
+										label : "2021",
+										borderColor : "#9370db",
+										fill : false
+									} ]
+						},
+						options : {
+							title : {
+								display : true,
+								text : 'Últimos cinco anos'
+							}
+						}
+					});
+
+		});
+		//]]>
+	</script>
+
+</ui:composition>

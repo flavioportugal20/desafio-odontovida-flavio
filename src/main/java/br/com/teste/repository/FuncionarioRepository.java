@@ -52,7 +52,7 @@ public class FuncionarioRepository implements Serializable {
 	public Funcionario createUpdate(Funcionario funcionario) {
 		try {
 			return manager.merge(funcionario);
-		} catch (PersistenceException e) {
+		} catch (Exception e) {
 			String tipo = (funcionario.getId() != null) ? "editar" : "criar";
 			FacesUtil.addErrorMessage("Falha ao tentar " + tipo + " funcionário!");
 			e.printStackTrace();
@@ -66,7 +66,7 @@ public class FuncionarioRepository implements Serializable {
 			funcionario = findById(funcionario.getId());
 			manager.remove(funcionario);
 			manager.flush();
-		} catch (PersistenceException e) {
+		} catch (Exception e) {
 			FacesUtil.addErrorMessage("Falha ao tentar deletar funcionário!");
 			e.printStackTrace();
 		}

@@ -16,9 +16,13 @@
    
 }
 
+.ui-datatable .rowTabela:hover{
+    background-color: #CCEBFF !important;
+}
+
 .ui-datatable .btn-tabela{
-	padding-left:30px !important;
-	padding-right:30px !important;
+	padding-left:50% !important;
+	padding-right:50% !important;
 }
 
 #userImage{

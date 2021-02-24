@@ -75,5 +75,5 @@ public class CadastroFuncionarioBean implements Serializable {
 	public void clearMsg() {
 		FacesUtil.execute("$('frm:messages').hide()");
 	}
-
+	
 }

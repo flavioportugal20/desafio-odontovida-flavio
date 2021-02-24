@@ -4,24 +4,22 @@
                 xmlns:p="http://primefaces.org/ui" xmlns:adm="http://github.com/adminfaces"
                 template="#{layoutMB.template}">
 
-    <ui:define name="metadata">
-        
+    <ui:define name="metadata">      
         <ui:param name="renderFormAsterisks" value="true"/>
         <h:outputScript library="js" name="script.js" target="head"/>
 		<h:outputStylesheet library="css" name="style.css" />
     </ui:define>
     
-    
-    <ui:define name="head">
-        <title>OdontoVida</title>
+	<ui:define name="head">
+        <ui:include src="/includes/identity/title.xhtml"/>
     </ui:define>
 
     <ui:define name="logo-lg">
-        OdontoVida
+        <ui:include src="/includes/identity/logo.xhtml"/>
     </ui:define>
 
     <ui:define name="logo-mini">
-        ODO
+        <ui:include src="/includes/identity/logo-mini.xhtml"/>
     </ui:define>
 
     <ui:define name="menu">
@@ -31,19 +29,18 @@
     <ui:define name="top-menu">
         <ui:include src="/includes/top-bar.xhtml"/>
     </ui:define>
-    
-    
+      
     <ui:define name="title">
         #{cadastroBean.editando ? 'Edição de Funcionário ' : 'Novo Funcionário'}
         <span style="font-size:24px; font-weight: 500; color:#f0611c;"> #{cadastroBean.funcionario.id}</span>
     </ui:define>
     <ui:define name="body">
-        <adm:breadcrumb title="#{not cadastroBean.editando ? 'Novo' : 'Funcionário '.concat(cadastroBean.funcionario.id)}" link="/car-form.jsf?id=#{cadastroBean.funcionario.id}"/>
+        <adm:breadcrumb title="#{not cadastroBean.editando ? 'Novo' : 'Funcionário '.concat(cadastroBean.funcionario.id)}" link="/funcionario/cadastro.xhtml?id=#{cadastroBean.funcionario.id}"/>
         <h:form id="form" prependId="false">
             <p:focus rendered="#{cadastroBean.editando}"/>
             <p:panel styleClass="box-primary card">
                 <div id="main-buttons" class="hidden-sm hidden-xs">
-                    <p:commandButton value="Save" action="#{cadastroBean.createUpdate}" update="@form"
+                    <p:commandButton value="#{cadastroBean.editando ? 'Editar' : 'Salvar'}" action="#{cadastroBean.createUpdate}" update="@form"
                                      icon="fa fa-check" styleClass="btn-primary"/>
                     <p:spacer width="5" rendered="#{not cadastroBean.editando}"/>
                     <p:commandButton value="Limpar" process="@this"
@@ -51,7 +48,7 @@
                                      update="@form" rendered="#{not cadastroBean.editando}" resetValues="true"/>
                     <p:spacer width="5" rendered="#{cadastroBean.editando}"/>
 
-                    <p:commandButton value="Delete" action="#{cadastroBean.delete}" process="@this"
+                    <p:commandButton value="Excluir" action="#{cadastroBean.delete}" process="@this"
                                      rendered="#{cadastroBean.editando}" icon="fa fa-trash"
                                      styleClass="btn-danger">
                         <f:setPropertyActionListener value="true"
@@ -59,30 +56,30 @@
                         <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger"/>
                     </p:commandButton>
                     <p:spacer width="5"/>
-                    <p:commandButton value="Back" immediate="true"
-                                     action="car-list?faces-redirect=true"
-                                     process="@this"
-                                     icon="fa fa-reply"/>
+                    
+                    <p:commandButton value="Voltar" immediate="true" action="lista?faces-redirect=true" process="@this" 
+                    	icon="fa fa-reply"/>                 
                 </div>
-                <p:splitButton value="Save" action="#{cadastroBean.createUpdate}" update="@form"
+                
+                <p:splitButton value="#{cadastroBean.editando ? 'Editar' : 'Salvar'}" action="#{cadastroBean.createUpdate}" update="@form"
                                icon="fa fa-check"
                                styleClass="hidden-md hidden-lg btn-primary">
                     <p:menuitem value="Limpar"
                                 process="@this" update="@form" rendered="#{not cadastroBean.editando}"
                                 resetValues="true" icon="fa fa-refresh"/>
-                    <p:menuitem value="Delete" action="#{cadastroBean.delete}" process="@this"
+                    <p:menuitem value="Excluir" action="#{cadastroBean.delete}" process="@this"
                                 rendered="#{cadastroBean.editando}" icon="fa fa-trash">
                         <f:setPropertyActionListener value="true"
                                                      target="#{facesContext.externalContext.flash.keepMessages}"/>
                         <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger"/>
                     </p:menuitem>
                     <p:separator/>
-                    <p:menuitem value="Back" action="car-list?faces-redirect=true"
+                    <p:menuitem value="Voltar" action="lista?faces-redirect=true"
                                 process="@this" immediate="true"
                                 icon="fa fa-reply"/>
                 </p:splitButton>
 
-                    <p:separator/>
+                <p:separator/>
 
                 <div class="ui-g ui-fluid">
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
@@ -139,20 +136,20 @@
                 </div>
                 <h:panelGroup id="footer" layout="block" styleClass="hidden-sm hidden-md hidden-lg">
                     <hr/>
-                    <p:splitButton value="Save" action="#{cadastroBean.createUpdate}" update="@form"
+                    <p:splitButton value="#{cadastroBean.editando ? 'Editar' : 'Salvar'}" action="#{cadastroBean.createUpdate}" update="@form"
                                    icon="fa fa-check"
                                    styleClass="hidden-md hidden-lg btn-primary">
                         <p:menuitem value="Limpar" 
                                     process="@this" update="@form" rendered="#{not cadastroBean.editando}"
                                     resetValues="true" icon="fa fa-refresh"/>
-                        <p:menuitem value="Delete" action="#{cadastroBean.delete}" process="@this"
+                        <p:menuitem value="Excluir" action="#{cadastroBean.delete}" process="@this"
                                     rendered="#{cadastroBean.editando}" icon="fa fa-trash">
                             <f:setPropertyActionListener value="true"
                                                          target="#{facesContext.externalContext.flash.keepMessages}"/>
-                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger"/>
+                            <p:confirm header="Confirmação" message="Are you sure?" icon="ui-icon-danger"/>
                         </p:menuitem>
                         <p:separator/>
-                        <p:menuitem value="Back" action="car-list?faces-redirect=true"
+                        <p:menuitem value="Voltar" action="lista?faces-redirect=true"
                                     process="@this" immediate="true"
                                     icon="fa fa-reply"/>
                     </p:splitButton>
@@ -160,25 +157,16 @@
             </p:panel>
 
             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-danger box-solid">
-                <p:commandButton value="Yes" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
+                <p:commandButton value="Sim" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
                                  icon="fa fa-check"/>
-                <p:commandButton value="No" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
+                <p:commandButton value="Não" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
                                  icon="fa fa-close"/>
             </p:confirmDialog>
         </h:form>
-
-
     </ui:define>
     
     <ui:define name="footer">
-          <a target="_blank"
-           href="http://www.franquiasodontovida.com.br/">
-            Copyright (C) 2021 - Franquia OdontoVida
-        </a>
-
-        <div class="pull-right hidden-xs" style="color: gray">
-            <i>1.0.0</i>
-        </div>
+         <ui:include src="/includes/footer.xhtml"/>
     </ui:define>
-
+    
 </ui:composition>

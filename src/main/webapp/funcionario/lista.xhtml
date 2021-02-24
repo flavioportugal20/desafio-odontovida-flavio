@@ -21,15 +21,15 @@
 	</ui:define>
 	
 	<ui:define name="head">
-        <title>OdontoVida</title>
+        <ui:include src="/includes/identity/title.xhtml"/>
     </ui:define>
 
     <ui:define name="logo-lg">
-        OdontoVida
+        <ui:include src="/includes/identity/logo.xhtml"/>
     </ui:define>
 
     <ui:define name="logo-mini">
-        ODO
+        <ui:include src="/includes/identity/logo-mini.xhtml"/>
     </ui:define>
 
     <ui:define name="menu">
@@ -46,13 +46,13 @@
     </ui:define>
 
 	<ui:define name="body">
-		<h:form  id="frmPesquisa">
-			
+		<h:form  id="frmPesquisa" >
+			<p:focus context="@form"/>
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<div >
 						<h3 class="box-title hidden-sm hidden-xs">Tabela de Dados</h3>
-						<p:commandButton action="/funcionario/car-form?faces-redirect=true"
+						<p:commandButton action="/funcionario/cadastro?faces-redirect=true"
 							icon="fa fa-plus" value="Novo Funcionário" styleClass="btn btn-success pull-right" />
 						<p:spacer width="5" />				
 					</div>
@@ -66,58 +66,55 @@
 						rowsPerPageTemplate="5,10,15" rows="10"
 						emptyMessage="Nenhum funcionário encontrado.">
 						
-					<f:facet name="header">
+						<f:facet name="header">
                             <span style="font-size:15px;">Procura:</span>
                             <p:spacer width="12" />
-                            <p:inputText id="txtpesquisar" size="40" maxlength="100" value="#{listBean.filtro}" >
+                            <p:inputText id="txtpesquisar" maxlength="100" value="#{listBean.filtro}" onkeydown="if (event.keyCode === 13) {onchange();return false;}" >
                        			<p:ajax listener="#{listBean.pesquisar}" update=":frmPesquisa"/>
                        		</p:inputText>                            
                         </f:facet>	
-
-					
-					<p:column styleClass="align-center" headerText="Id" priority="1" style="width:10%">
-						<h:outputText value="#{funcionario.id}" />
-					</p:column>
-
-					<p:column styleClass="align-center" headerText="Nome" priority="2" tyle="width:40%">
-						<h:outputText value="#{funcionario.nome}" />
-					</p:column>
-						
-
-					<p:column headerText="Data Nascimento" priority="3" style="width:12%">
-						<h:outputText value="#{funcionario.dataNascimento}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</h:outputText>
-					</p:column>
-
-					<p:column headerText="CPF" priority="4" style="width:15%">
-						<h:outputText value="#{funcionario.cpf}" />
-					</p:column>
-
-					<p:column headerText="Salario" priority="5"
-						style="width:11%; text-align: right;">
-						<h:outputText value="#{funcionario.salario}">
-							<f:convertNumber type="currency" locale="pt_BR" />
-						</h:outputText>
-					</p:column>
-
-					<p:column headerText="Editar" priority="6" style="width: 6%; text-align: center">
-						<p:button outcome="/funcionario/car-form" icon="fa fa-pencil" styleClass="btn btn-primary btn-xs btn-tabela"
-							title="Editar">
-							<f:param name="id" value="#{funcionario.id}" />
-						</p:button>
-					</p:column>
-					<p:column headerText="Excluir" priority="6" style="width: 6%; text-align: center">
-						<p:commandButton icon="fa fa-trash" title="Excluir"  styleClass="btn btn-danger btn-xs btn-tabela"
-							oncomplete="PF('confirmacaoExclusao').show()" process="@this"
-							update=":frmPesquisa:confirmacaoExclusaoDialog">
-							<f:setPropertyActionListener
-								target="#{listBean.funcionarioSelect}"
-								value="#{funcionario}" />
-						</p:commandButton>
-					</p:column>
-						
-						
+				
+						<p:column styleClass="align-center" headerText="Id" priority="1" style="width:10%">
+							<h:outputText value="#{funcionario.id}" />
+						</p:column>
+	
+						<p:column styleClass="align-center" headerText="Nome" priority="2" tyle="width:40%">
+							<h:outputText value="#{funcionario.nome}" />
+						</p:column>
+							
+						<p:column headerText="Data Nascimento" priority="3" style="width:12%">
+							<h:outputText value="#{funcionario.dataNascimento}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+	
+						<p:column headerText="CPF" priority="4" style="width:15%">
+							<h:outputText value="#{funcionario.cpf}" />
+						</p:column>
+	
+						<p:column headerText="Salario" priority="5"
+							style="width:11%; text-align: right;">
+							<h:outputText value="#{funcionario.salario}">
+								<f:convertNumber type="currency" locale="pt_BR" />
+							</h:outputText>
+						</p:column>
+	
+						<p:column headerText="Editar" priority="1" style="width: 6%; text-align: center">
+							<p:button outcome="/funcionario/cadastro" icon="fa fa-pencil" styleClass="btn btn-primary btn-xs btn-tabela"
+								title="Editar">
+								<f:param name="id" value="#{funcionario.id}" />
+							</p:button>
+						</p:column>
+						<p:column headerText="Excluir" priority="1" style="width: 6%; text-align: center">
+							<p:commandButton icon="fa fa-trash" title="Excluir"  styleClass="btn btn-danger btn-xs btn-tabela"
+								oncomplete="PF('confirmacaoExclusao').show()" process="@this"
+								update=":frmPesquisa:confirmacaoExclusaoDialog">
+								<f:setPropertyActionListener
+									target="#{listBean.funcionarioSelect}"
+									value="#{funcionario}" />
+							</p:commandButton>
+						</p:column>
+								
 					</p:dataTable>
 					
 				</div>
@@ -135,19 +132,11 @@
 					styleClass="btn-material btn-danger ui-confirmdialog-no"
 					icon="fa fa-close" />
 			</p:confirmDialog>
-		</h:form>
-		
+		</h:form>		
 	</ui:define>
 	
 	<ui:define name="footer">
-          <a target="_blank"
-           href="http://www.franquiasodontovida.com.br/">
-            Copyright (C) 2021 - Franquia OdontoVida
-        </a>
-
-        <div class="pull-right hidden-xs" style="color: gray">
-            <i>1.0.0</i>
-        </div>
+         <ui:include src="/includes/footer.xhtml"/>
     </ui:define>
 
 </ui:composition>
